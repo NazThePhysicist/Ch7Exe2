@@ -8,9 +8,6 @@
 ##   will need to clean up at least some of the variables before fitting
 ##   the model.
 
-> exe1 <- glm(everwrk~age_p+r_maritl, data = NH11, family = "binomial")
-> summary(exe1)
-
 
 > exe1subset <- subset(NH11, select = c("everwrk", "age_p",  "r_maritl"))
 
