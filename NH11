@@ -1,0 +1,39 @@
+## Exercise: logistic regression
+##   Use the NH11 data set that we loaded earlier.
+##   1. Use glm to conduct a logistic regression to predict ever worked
+##      (everwrk) using age (age_p) and marital status (r_maritl).
+##   2. Predict the probability of working for each level of marital
+##      status.
+##   Note that the data is not perfectly clean and ready to be modeled. You
+##   will need to clean up at least some of the variables before fitting
+##   the model.
+
+> exe1 <- glm(everwrk~age_p+r_maritl, data = NH11, family = "binomial")
+> summary(exe1)
+
+
+> exe1subset <- subset(NH11, select = c("everwrk", "age_p",  "r_maritl"))
+
+> summary(exe1subset)
+
+> exe1subset$everwrk <- factor(exe1subset$everwrk, levels=c("2 No", "1 Yes"))
+
+> levels(exe1subset$everwrk)
+
+> exe1subset$r_maritl <- droplevels(exe1subset$r_maritl)
+> summary(exe1subset$r_maritl)
+> 
+> exe1subset <- transform(exe1subset, exe1subset$everwrk , exe1subset$r_maritl )
+> summary(exe1subset)
+> exe1.mod <- glm(everwrk~age_p+r_maritl,
++                data=exe1subset, family="binomial")  #my coeff are opposite in signs!!! 
+
+
+> summary(exe1.mod)
+> plot(allEffects(exe1.mod))
+> data.frame(Effect("r_maritl", exe1.mod)) #my fit is 1-(what it needs to be)!!!
+
+
+
+
+
